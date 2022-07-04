@@ -1,0 +1,6 @@
+[submodule "plugin-tools"]
+	path = plugin-tools
+	url = https://github.com/LedgerHQ/plugin-tools
+[submodule "app-ethereum"]
+	path = app-ethereum
+	url = https://github.com/LedgerHQ/app-ethereum

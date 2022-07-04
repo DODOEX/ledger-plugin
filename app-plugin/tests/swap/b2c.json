@@ -1,0 +1,20 @@
+{
+    "chainId": 1,
+    "contracts": [
+        {
+            "address": "0xa356867fdcea8e71aeaf87805808803806231fdc",
+            "contractName": "DODOV2Proxy02",
+            "selectors": {
+                "0x54bacd13": {
+                    "erc20OfInterest": [
+                        "fromToken",
+                        "toToken"
+                    ],
+                    "method": "externalSwap",
+                    "plugin": "DODO"
+                }
+            }
+        }
+    ],
+    "name": "DODO"
+}

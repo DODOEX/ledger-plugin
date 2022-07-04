@@ -1,0 +1,10 @@
+# Editors
+.idea/
+.vscode
+
+# JS
+tests/node_modules
+tests/lib
+tests/elfs
+
+*.backup
