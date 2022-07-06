@@ -54,7 +54,7 @@ nano_models.forEach(function(model) {
   await waitForAppScreen(sim);
   // Navigate the display by pressing the right button 10 times, then pressing both buttons to accept the transaction.
   // EDIT THIS: modify `10` to fix the number of screens you are expecting to navigate through.
-  await sim.navigateAndCompareSnapshots('.', model.name + '_swap_v2_proxy02_external_swap_with', [right_clicks, 0]);
+  await sim.navigateAndCompareSnapshots('.', model.name + '_swap_v2_proxy02_external_swap', [right_clicks, 0]);
 
   await tx;
   }));
