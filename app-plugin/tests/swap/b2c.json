@@ -12,6 +12,14 @@
                     ],
                     "method": "externalSwap",
                     "plugin": "DODO"
+                },
+                "0xf87dc1b7": {
+                    "erc20OfInterest": [
+                        "fromToken",
+                        "toToken"
+                    ],
+                    "method": "dodoSwapV2TokenToToken",
+                    "plugin": "DODO"
                 }
             }
         }

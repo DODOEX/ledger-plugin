@@ -26,13 +26,16 @@
 
 // List of selectors supported by this plugin.
 // EDIT THIS: Adapt the variable names and change the `0x` values to match your selectors.
+// 0xa356867fdcea8e71aeaf87805808803806231fdc
 static const uint32_t SWAP_V2_PROXY_EXTERNAL_SWAP_SELECTOR = 0x54bacd13;
+static const uint32_t SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN_SELECTOR = 0xf87dc1b7;
 
 // Array of all the different boilerplate selectors. Make sure this follows the same order as the
 // enum defined in `boilerplate_plugin.h`
 // EDIT THIS: Use the names of the array declared above.
 const uint32_t BOILERPLATE_SELECTORS[NUM_SELECTORS] = {
     SWAP_V2_PROXY_EXTERNAL_SWAP_SELECTOR,
+    SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN_SELECTOR,
 };
 
 // Function to dispatch calls from the ethereum app.

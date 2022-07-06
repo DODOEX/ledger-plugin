@@ -11,11 +11,17 @@ void handle_query_contract_id(void *parameters) {
     strlcpy(msg->name, PLUGIN_NAME, msg->nameLength);
 
     // EDIT THIS: Adapt the cases by modifying the strings you pass to `strlcpy`.
-    if (context->selectorIndex == SWAP_V2_PROXY_EXTERNAL_SWAP) {
+    switch (context->selectorIndex)
+    {
+    case SWAP_V2_PROXY_EXTERNAL_SWAP:
+    case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN:
         strlcpy(msg->version, "Swap", msg->versionLength);
         msg->result = ETH_PLUGIN_RESULT_OK;
-    } else {
+        break;
+    
+    default:
         PRINTF("Selector index: %d not supported\n", context->selectorIndex);
         msg->result = ETH_PLUGIN_RESULT_ERROR;
+        break;
     }
 }

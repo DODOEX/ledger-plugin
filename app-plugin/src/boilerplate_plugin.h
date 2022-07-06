@@ -17,6 +17,7 @@
 // EDIT THIS: Change the naming (`selector_t`), and add your selector names.
 typedef enum {
     SWAP_V2_PROXY_EXTERNAL_SWAP = 0,
+    SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN
 } selector_t;
 
 // Enumeration used to parse the smart contract data.
