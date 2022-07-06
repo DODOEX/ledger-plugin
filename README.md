@@ -54,6 +54,10 @@ yarn
 yarn test
 ```
 
+## tips
+
+- `tokenLookup[12]` 指定 token 有可能查询不到，要注意指定常用的 token
+
 ## 参考文档
 
 [ledger 文档](https://developers.ledger.com/docs/dapp/process/)

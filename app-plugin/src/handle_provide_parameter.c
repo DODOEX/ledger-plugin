@@ -1,7 +1,7 @@
 #include "boilerplate_plugin.h"
 
 // EDIT THIS: Remove this function and write your own handlers!
-static void handle_swap_exact_eth_for_tokens(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg, context_t *context) {
     if (context->go_to_offset) {
     //    if (msg->parameterOffset != context->offset + SELECTOR_SIZE) {
            return;
@@ -59,10 +59,8 @@ void handle_provide_parameter(void *parameters) {
 
     // EDIT THIS: adapt the cases and the names of the functions.
     switch (context->selectorIndex) {
-        case SWAP_EXACT_ETH_FOR_TOKENS:
-            handle_swap_exact_eth_for_tokens(msg, context);
-            break;
-        case BOILERPLATE_DUMMY_2:
+        case SWAP_V2_PROXY_EXTERNAL_SWAP:
+            handle_swap_v2_proxy_external_swap(msg, context);
             break;
         default:
             PRINTF("Selector Index not supported: %d\n", context->selectorIndex);

@@ -16,8 +16,7 @@
 // Should follow the exact same order as the array declared in main.c
 // EDIT THIS: Change the naming (`selector_t`), and add your selector names.
 typedef enum {
-    SWAP_EXACT_ETH_FOR_TOKENS = 0,
-    BOILERPLATE_DUMMY_2,
+    SWAP_V2_PROXY_EXTERNAL_SWAP = 0,
 } selector_t;
 
 // Enumeration used to parse the smart contract data.
