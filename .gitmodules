@@ -4,3 +4,6 @@
 [submodule "app-ethereum"]
 	path = app-ethereum
 	url = https://github.com/LedgerHQ/app-ethereum
+[submodule "app-plugin/ethereum-plugin-sdk"]
+	path = app-plugin/ethereum-plugin-sdk
+	url = https://github.com/LedgerHQ/ethereum-plugin-sdk
