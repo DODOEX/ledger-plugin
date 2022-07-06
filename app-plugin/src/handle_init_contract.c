@@ -46,10 +46,8 @@ void handle_init_contract(void *parameters) {
     // to parse.
     switch (context->selectorIndex) {
         case SWAP_V2_PROXY_EXTERNAL_SWAP:
-            context->next_param = FROM_TOKEN;
-            break;
-        // Keep this
         case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN:
+        case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH:
             context->next_param = FROM_TOKEN;
             break;
         default:

@@ -78,6 +78,36 @@ static void handle_swap_v2_proxy_dodo_swap_v2_token_to_token(ethPluginProvidePar
     }
 }
 
+static void handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(ethPluginProvideParameter_t *msg, context_t *context) {
+    if (context->go_to_offset) {
+        return;
+    }
+    switch (context->next_param) {
+        case FROM_TOKEN:
+            copy_address(context->token_pay, msg->parameter, sizeof(context->token_pay));
+            context->next_param = FROM_TOKEN_AMOUNT;
+            break;
+        case FROM_TOKEN_AMOUNT:
+            copy_parameter(context->amount_pay,
+                            msg->parameter,
+                            sizeof(context->amount_pay));
+            context->next_param = MIN_RETURN_AMOUNT;
+            break;
+        case MIN_RETURN_AMOUNT:
+            copy_parameter(context->amount_received,
+                            msg->parameter,
+                            sizeof(context->amount_received));
+            context->go_to_offset = true;
+            context->next_param = UNEXPECTED_PARAMETER;
+            break;
+        // Keep this
+        default:
+            PRINTF("Param not supported: %d\n", context->next_param);
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
+    }
+}
+
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;
     context_t *context = (context_t *) msg->pluginContext;
@@ -98,6 +128,9 @@ void handle_provide_parameter(void *parameters) {
             break;
         case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN:
             handle_swap_v2_proxy_dodo_swap_v2_token_to_token(msg, context);
+            break;
+        case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH:
+            handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(msg, context);
             break;
         default:
             PRINTF("Selector Index not supported: %d\n", context->selectorIndex);

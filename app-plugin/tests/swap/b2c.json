@@ -20,6 +20,13 @@
                     ],
                     "method": "dodoSwapV2TokenToToken",
                     "plugin": "DODO"
+                },
+                "0x1e6d24c2": {
+                    "erc20OfInterest": [
+                        "fromToken"
+                    ],
+                    "method": "dodoSwapV2TokenToETH",
+                    "plugin": "DODO"
                 }
             }
         }
