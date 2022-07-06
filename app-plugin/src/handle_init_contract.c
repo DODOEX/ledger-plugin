@@ -48,6 +48,7 @@ void handle_init_contract(void *parameters) {
         case SWAP_V2_PROXY_EXTERNAL_SWAP:
         case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN:
         case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH:
+        case SWAP_DODO_ROUTE_PROXY_MIX_SWAP:
             context->next_param = FROM_TOKEN;
             break;
         default:

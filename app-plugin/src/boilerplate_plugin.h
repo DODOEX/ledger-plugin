@@ -6,7 +6,7 @@
 
 // Number of selectors defined in this plugin. Should match the enum `selector_t`.
 // EDIT THIS: Put in the number of selectors your plugin is going to support.
-#define NUM_SELECTORS 3
+#define NUM_SELECTORS 4
 
 // Name of the plugin.
 // EDIT THIS: Replace with your plugin name.
@@ -19,6 +19,7 @@ typedef enum {
     SWAP_V2_PROXY_EXTERNAL_SWAP = 0,
     SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN,
     SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH,
+    SWAP_DODO_ROUTE_PROXY_MIX_SWAP,
 } selector_t;
 
 // Enumeration used to parse the smart contract data.

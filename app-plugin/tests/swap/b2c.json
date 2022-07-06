@@ -29,6 +29,20 @@
                     "plugin": "DODO"
                 }
             }
+        },
+        {
+            "address": "0xa2398842f37465f89540430bdc00219fa9e4d28a",
+            "contractName": "DODORouteProxy",
+            "selectors": {
+                "0x7617b389": {
+                    "erc20OfInterest": [
+                        "fromToken",
+                        "toToken"
+                    ],
+                    "method": "mixSwap",
+                    "plugin": "DODO"
+                }
+            }
         }
     ],
     "name": "DODO"
