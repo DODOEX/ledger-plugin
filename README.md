@@ -82,7 +82,9 @@ make
 // 这里从 [1] 跳到 [4] ，所以用 PARAMETER_LENGTH * 3
 context->offset = msg->parameterOffset - SELECTOR_SIZE + PARAMETER_LENGTH * 3;
 ```
-得到了 `midToken` 的偏移量，就可以得到 `fromToken` 和 `toToken` 了
+得到了 `midToken` 的偏移量，就可以得到 `fromToken` 和 `toToken` 了.
+
+可以参考 [doodMutliSwap 的提交记录](https://github.com/DODOEX/ledger-plugin/commit/65fbae9d63fa40637ba066b9a220b536660045f2)，及 [Ledger 关于参数分析的文档](https://developers.ledger.com/docs/dapp/nano-plugin/provide-parameter/)
 
 ## 打包
 
