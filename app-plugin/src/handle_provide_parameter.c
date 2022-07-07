@@ -141,6 +141,55 @@ static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *m
     }
 }
 
+static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParameter_t *msg, context_t *context) {
+    if (context->go_to_offset) {
+        if (msg->parameterOffset != context->offset + SELECTOR_SIZE) {
+            return;
+        }
+        context->go_to_offset = false;
+    }
+    switch (context->next_param) {
+        case FROM_TOKEN_AMOUNT:
+            copy_parameter(context->amount_pay,
+                            msg->parameter,
+                            sizeof(context->amount_pay));
+            context->next_param = MIN_RETURN_AMOUNT;
+            break;
+        case MIN_RETURN_AMOUNT:
+            copy_parameter(context->amount_received,
+                            msg->parameter,
+                            sizeof(context->amount_received));
+            context->next_param = PATH_OFFSET;
+            context->offset = msg->parameterOffset - SELECTOR_SIZE + PARAMETER_LENGTH * 3;
+            context->go_to_offset = true;
+            break;
+        case PATH_OFFSET:
+            context->offset = U2BE(msg->parameter, PARAMETER_LENGTH - 2);
+            context->next_param = PATH_LENGTH;
+            context->go_to_offset = true;
+            break;
+        case PATH_LENGTH:
+            context->next_param = FROM_TOKEN;
+            break;
+        case FROM_TOKEN:
+            copy_address(context->token_pay, msg->parameter, sizeof(context->token_pay));
+            context->offset = msg->parameterOffset - SELECTOR_SIZE + PARAMETER_LENGTH * 3;
+            context->next_param = TO_TOKEN;
+            context->go_to_offset = true;
+            break;
+        case TO_TOKEN:
+            copy_address(context->token_received, msg->parameter, sizeof(context->token_received));
+            context->next_param = UNEXPECTED_PARAMETER;
+            context->go_to_offset = true;
+            break;
+        // Keep this
+        default:
+            PRINTF("Param not supported: %d\n", context->next_param);
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
+    }
+}
+
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;
     context_t *context = (context_t *) msg->pluginContext;
@@ -167,6 +216,9 @@ void handle_provide_parameter(void *parameters) {
             break;
         case SWAP_DODO_ROUTE_PROXY_MIX_SWAP:
             handle_swap_dodo_route_proxy_mix_swap(msg, context);
+            break;
+        case SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP:
+            handle_swap_dodo_route_proxy_dodo_mutli_swap(msg, context);
             break;
         default:
             PRINTF("Selector Index not supported: %d\n", context->selectorIndex);

@@ -41,6 +41,14 @@
                     ],
                     "method": "mixSwap",
                     "plugin": "DODO"
+                },
+                "0x81791788": {
+                    "erc20OfInterest": [
+                        "midToken.0",
+                        "midToken.3"
+                    ],
+                    "method": "dodoMutliSwap",
+                    "plugin": "DODO"
                 }
             }
         }

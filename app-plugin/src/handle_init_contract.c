@@ -51,6 +51,9 @@ void handle_init_contract(void *parameters) {
         case SWAP_DODO_ROUTE_PROXY_MIX_SWAP:
             context->next_param = FROM_TOKEN;
             break;
+        case SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP:
+            context->next_param = FROM_TOKEN_AMOUNT;
+            break;
         default:
             PRINTF("Missing selectorIndex: %d\n", context->selectorIndex);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
