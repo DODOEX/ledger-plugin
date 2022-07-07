@@ -10,14 +10,20 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
 
     uint8_t decimals = context->decimals_pay;
     const char *ticker = context->ticker_pay;
+    const uint8_t *amount = context->amount_pay;
+    uint8_t amount_size = sizeof(context->amount_pay); 
 
     // If the token look up failed, use the default network ticker along with the default decimals.
     if (!context->token_found_pay) {
         decimals = WEI_TO_ETHER;
         ticker = msg->network_ticker;
     }
+    if (context->eth_amount_pay) {
+        amount = msg->pluginSharedRO->txContent->value.value;
+        amount_size = msg->pluginSharedRO->txContent->value.length;
+    }
 
-    amountToString(context->amount_pay, sizeof(context->amount_pay), decimals, ticker, msg->msg, msg->msgLength);
+    amountToString(amount, amount_size, decimals, ticker, msg->msg, msg->msgLength);
 }
 
 // Set UI for "Receive" screen.

@@ -16,6 +16,7 @@ void handle_query_contract_id(void *parameters) {
     case SWAP_V2_PROXY_EXTERNAL_SWAP:
     case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN:
     case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH:
+    case SWAP_V2_PROXY_DODO_SWAP_V2_ETH_TO_TOKEN:
     case SWAP_DODO_ROUTE_PROXY_MIX_SWAP:
     case SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP:
         strlcpy(msg->version, "Swap", msg->versionLength);

@@ -27,6 +27,13 @@
                     ],
                     "method": "dodoSwapV2TokenToETH",
                     "plugin": "DODO"
+                },
+                "0x5028bb95": {
+                    "erc20OfInterest": [
+                        "toToken"
+                    ],
+                    "method": "dodoSwapV2ETHToToken",
+                    "plugin": "DODO"
                 }
             }
         },

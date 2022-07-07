@@ -6,7 +6,7 @@
 
 // Number of selectors defined in this plugin. Should match the enum `selector_t`.
 // EDIT THIS: Put in the number of selectors your plugin is going to support.
-#define NUM_SELECTORS 5
+#define NUM_SELECTORS 6
 
 // Name of the plugin.
 // EDIT THIS: Replace with your plugin name.
@@ -19,6 +19,7 @@ typedef enum {
     SWAP_V2_PROXY_EXTERNAL_SWAP = 0,
     SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN,
     SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH,
+    SWAP_V2_PROXY_DODO_SWAP_V2_ETH_TO_TOKEN,
     SWAP_DODO_ROUTE_PROXY_MIX_SWAP,
     SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP,
 } selector_t;
@@ -57,6 +58,8 @@ typedef struct context_t {
     char ticker_pay[MAX_TICKER_LEN];
     uint8_t decimals_pay;
     uint8_t token_found_pay;
+    bool eth_amount_pay;   // true if the amount is in ETH
+
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.

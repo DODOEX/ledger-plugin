@@ -107,6 +107,32 @@ static void handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(ethPluginProvideParam
             break;
     }
 }
+
+static void handle_swap_v2_proxy_dodo_swap_v2_eth_to_token(ethPluginProvideParameter_t *msg, context_t *context) {
+    if (context->go_to_offset) {
+        return;
+    }
+    switch (context->next_param) {
+        case TO_TOKEN:
+            context->eth_amount_pay = true;
+            copy_address(context->token_received, msg->parameter, sizeof(context->token_received));
+            context->next_param = MIN_RETURN_AMOUNT;
+            break;
+        case MIN_RETURN_AMOUNT:
+            copy_parameter(context->amount_received,
+                            msg->parameter,
+                            sizeof(context->amount_received));
+            context->go_to_offset = true;
+            context->next_param = UNEXPECTED_PARAMETER;
+            break;
+        // Keep this
+        default:
+            PRINTF("Param not supported: %d\n", context->next_param);
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
+    }
+}
+
 static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *msg, context_t *context) {
     if (context->go_to_offset) {
         return;
@@ -213,6 +239,9 @@ void handle_provide_parameter(void *parameters) {
             break;
         case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_ETH:
             handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(msg, context);
+            break;
+        case SWAP_V2_PROXY_DODO_SWAP_V2_ETH_TO_TOKEN:
+            handle_swap_v2_proxy_dodo_swap_v2_eth_to_token(msg, context);
             break;
         case SWAP_DODO_ROUTE_PROXY_MIX_SWAP:
             handle_swap_dodo_route_proxy_mix_swap(msg, context);
