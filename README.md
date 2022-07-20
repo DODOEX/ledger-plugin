@@ -1,4 +1,26 @@
-# Ledger Dapp 插件
+# Ledger Dapp Plugin
+
+## contracts
+
+| chain   | contract                                   | name           |
+|---------|--------------------------------------------|----------------|
+| mainnet | [0xa356867fdcea8e71aeaf87805808803806231fdc](https://etherscan.io/address/0xa356867fdcea8e71aeaf87805808803806231fdc#code)    | DODOV2Proxy02  |
+|         | [0xa2398842f37465f89540430bdc00219fa9e4d28a](https://etherscan.io/address/0xa2398842f37465f89540430bdc00219fa9e4d28a#code)    | DODORouteProxy |
+| bsc     | [0x8F8Dd7DB1bDA5eD3da8C9daf3bfa471c12d58486](https://bscscan.com/address/0x8f8dd7db1bda5ed3da8c9daf3bfa471c12d58486#code)     | DODOV2Proxy02  |
+|         | [0x6B3D817814eABc984d51896b1015C0b89E9737Ca](https://bscscan.com/address/0x6b3d817814eabc984d51896b1015c0b89e9737ca#code)     | DODORouteProxy |
+| polygon | [0xa222e6a71D1A1Dd5F279805fbe38d5329C1d0e70](https://polygonscan.com/address/0xa222e6a71D1A1Dd5F279805fbe38d5329C1d0e70#code) | DODOV2Proxy02  |
+|         | [0x2fA4334cfD7c56a0E7Ca02BD81455205FcBDc5E9](https://polygonscan.com/address/0x2fa4334cfd7c56a0e7ca02bd81455205fcbdc5e9#code) | DODORouteProxy |
+
+## methods
+
+| contract name  | id         | name                   |
+|----------------|------------|------------------------|
+| DODOV2Proxy02  | 0x54bacd13 | externalSwap           |
+|                | 0xf87dc1b7 | dodoSwapV2TokenToToken |
+|                | 0x1e6d24c2 | dodoSwapV2TokenToETH   |
+|                | 0x5028bb95 | dodoSwapV2ETHToToken   |
+| DODORouteProxy | 0x7617b389 | mixSwap                |
+|                | 0x81791788 | dodoMutliSwap          |
 
 ## 概述
 
