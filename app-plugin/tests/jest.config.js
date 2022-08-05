@@ -29,7 +29,7 @@ module.exports = {
     // "**/__tests__/**/*.[jt]s?(x)",
     // "**/?(*.)+(spec|test).[tj]s?(x)",
     // "**/?(*.)+(ispec|test).[tj]s?(x)",
-    "**/swap_v2_proxy02_dodo_swap_v2_eth_to_token.test.js"
+    "**/swap_weth9_withdraw.test.js"
   ],
 
   // Path of the file where tests can be """decorated"""

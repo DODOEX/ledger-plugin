@@ -19,6 +19,7 @@ void handle_query_contract_id(void *parameters) {
     case SWAP_V2_PROXY_DODO_SWAP_V2_ETH_TO_TOKEN:
     case SWAP_DODO_ROUTE_PROXY_MIX_SWAP:
     case SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP:
+    case SWAP_WETH9_WITHDRAW:
         strlcpy(msg->version, "Swap", msg->versionLength);
         msg->result = ETH_PLUGIN_RESULT_OK;
         break;

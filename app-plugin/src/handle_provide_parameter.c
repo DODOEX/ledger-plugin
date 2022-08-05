@@ -215,7 +215,29 @@ static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParamet
             break;
     }
 }
+static void handle_swap_weth9_withdraw(ethPluginProvideParameter_t *msg, context_t *context) {
+    if (context->go_to_offset) {
+        return;
+    }
+    switch (context->next_param) {
+        case FROM_TOKEN_AMOUNT:
+            copy_parameter(context->amount_pay,
+                            msg->parameter,
+                            sizeof(context->amount_pay));
+            // copy_parameter(context->amount_received,
+            //                 msg->parameter,
+            //                 sizeof(context->amount_received));
+            context->next_param = UNEXPECTED_PARAMETER;
+            context->go_to_offset = true;
+            break;
 
+        // Keep this
+        default:
+            PRINTF("Param not supported: %d\n", context->next_param);
+            msg->result = ETH_PLUGIN_RESULT_ERROR;
+            break;
+    }
+}
 void handle_provide_parameter(void *parameters) {
     ethPluginProvideParameter_t *msg = (ethPluginProvideParameter_t *) parameters;
     context_t *context = (context_t *) msg->pluginContext;
@@ -248,6 +270,9 @@ void handle_provide_parameter(void *parameters) {
             break;
         case SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP:
             handle_swap_dodo_route_proxy_dodo_mutli_swap(msg, context);
+            break;
+        case SWAP_WETH9_WITHDRAW:
+            handle_swap_weth9_withdraw(msg, context);
             break;
         default:
             PRINTF("Selector Index not supported: %d\n", context->selectorIndex);

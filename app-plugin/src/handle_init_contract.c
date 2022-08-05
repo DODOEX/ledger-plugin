@@ -57,6 +57,9 @@ void handle_init_contract(void *parameters) {
         case SWAP_V2_PROXY_DODO_SWAP_V2_ETH_TO_TOKEN:
             context->next_param = TO_TOKEN;
             break;
+        case SWAP_WETH9_WITHDRAW:
+            context->next_param = FROM_TOKEN_AMOUNT;
+            break;
         default:
             PRINTF("Missing selectorIndex: %d\n", context->selectorIndex);
             msg->result = ETH_PLUGIN_RESULT_ERROR;
