@@ -26,10 +26,9 @@ module.exports = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    // "**/__tests__/**/*.[jt]s?(x)",
-    // "**/?(*.)+(spec|test).[tj]s?(x)",
-    // "**/?(*.)+(ispec|test).[tj]s?(x)",
-    "**/swap_weth9_deposit.test.js"
+    "**/__tests__/**/*.[jt]s?(x)",
+    "**/?(*.)+(spec|test).[tj]s?(x)",
+    "**/?(*.)+(ispec|test).[tj]s?(x)",
   ],
 
   // Path of the file where tests can be """decorated"""

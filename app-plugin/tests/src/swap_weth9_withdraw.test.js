@@ -15,7 +15,7 @@ nano_models.forEach(function(model) {
   test('[Nano ' + model.letter + '] Swap weth9 withdraw', zemu(model, async (sim, eth) => {
   const contract = new ethers.Contract(contractAddr, abi);
 
-  const fromTokenAmount = parseUnits("28471151959593036279", 'wei');
+  const fromTokenAmount = parseUnits("5000000000000000", 'wei');
 
   // EDIT THIS: adapt the signature to your method
   // signature: swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
@@ -40,7 +40,7 @@ nano_models.forEach(function(model) {
     serializedTx
   );
 
-  const right_clicks = model.letter === 'S' ? 7 : 5;
+  const right_clicks = 5;
 
   // Wait for the application to actually load and parse the transaction
   await waitForAppScreen(sim);

@@ -37,7 +37,7 @@
 git submodule update --remote
 ```
 
-## 开发
+## 环境搭建
 
 1. 安装 `docker` 及 `docker-compose`
 
@@ -134,6 +134,7 @@ yarn test
 ## tips
 
 - `tokenLookup[12]` 指定 token 有可能查询不到，要注意指定常用的 token
+- 要注意修改测试文件中的 `right_clicks` 变量，这里指的是右键几次，会到 Accept 的界面。
 
 ## 参考文档
 
