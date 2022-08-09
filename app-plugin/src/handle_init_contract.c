@@ -60,6 +60,9 @@ void handle_init_contract(void *parameters) {
         case SWAP_WETH9_WITHDRAW:
             context->next_param = FROM_TOKEN_AMOUNT;
             break;
+        case SWAP_WETH9_DEPOSIT:
+            context->next_param = FROM_TOKEN_AMOUNT;
+            break;
         default:
             PRINTF("Missing selectorIndex: %d\n", context->selectorIndex);
             msg->result = ETH_PLUGIN_RESULT_ERROR;

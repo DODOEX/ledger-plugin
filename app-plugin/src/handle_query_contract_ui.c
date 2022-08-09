@@ -24,6 +24,10 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
             strcat(weth, msg->network_ticker);
             strlcpy(ticker, weth, sizeof(ticker) + 1);
             break;
+        case SWAP_WETH9_DEPOSIT:
+            amount = msg->pluginSharedRO->txContent->value.value;
+            amount_size = msg->pluginSharedRO->txContent->value.length;
+            break;
         
         default:
             break;
@@ -43,11 +47,8 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
 
     uint8_t decimals = context->decimals_received;
     const char *ticker = context->ticker_received;
-    PRINTF("wang\n");
     const uint8_t *amount = context->amount_received;
     uint8_t amount_size = sizeof(context->amount_received); 
-    // uint8_t amount[INT256_LENGTH];
-    // strcpy(amount, context->amount_pay);
 
     // If the token look up failed, use the default network ticker along with the default decimals.
     if (!context->token_found_received) {
@@ -55,8 +56,21 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
         ticker = msg->network_ticker;
     }
 
+    char weth[3] = "W";
+    switch (context->selectorIndex) {
+        case SWAP_WETH9_DEPOSIT:
+            strcat(weth, msg->network_ticker);
+            strlcpy(ticker, weth, sizeof(ticker) + 1);
+            amount = msg->pluginSharedRO->txContent->value.value;
+            amount_size = msg->pluginSharedRO->txContent->value.length;
+            break;
+        
+        default:
+            break;
+    }
+
     amountToString(amount,
-                   INT256_LENGTH,
+                   amount_size,
                    decimals,
                    ticker,
                    msg->msg,

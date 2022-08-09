@@ -24,7 +24,8 @@
 |                | 0x5028bb95 | dodoSwapV2ETHToToken   |
 | DODORouteProxy | 0x7617b389 | mixSwap                |
 |                | 0x81791788 | dodoMutliSwap          |
-| WETH9          | 0x2e1a7d4d | withdraw                |
+| WETH9          | 0x2e1a7d4d | withdraw               |
+|                | 0xd0e30db0 | deposit                |
 
 ## 概述
 

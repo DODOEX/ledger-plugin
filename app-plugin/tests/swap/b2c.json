@@ -67,6 +67,11 @@
                     "erc20OfInterest": [],
                     "method": "withdraw",
                     "plugin": "DODO"
+                },
+                "0xd0e30db0": {
+                    "erc20OfInterest": [],
+                    "method": "deposit",
+                    "plugin": "DODO"
                 }
             }
         }
