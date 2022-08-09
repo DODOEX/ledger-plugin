@@ -21,7 +21,6 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
     char weth[3] = "W";
     switch (context->selectorIndex) {
         case SWAP_WETH9_WITHDRAW:
-            // is_found = true;
             strcat(weth, msg->network_ticker);
             strlcpy(ticker, weth, sizeof(ticker) + 1);
             break;

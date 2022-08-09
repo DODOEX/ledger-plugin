@@ -224,9 +224,9 @@ static void handle_swap_weth9_withdraw(ethPluginProvideParameter_t *msg, context
             copy_parameter(context->amount_pay,
                             msg->parameter,
                             sizeof(context->amount_pay));
-            // copy_parameter(context->amount_received,
-            //                 msg->parameter,
-            //                 sizeof(context->amount_received));
+            copy_parameter(context->amount_received,
+                            msg->parameter,
+                            sizeof(context->amount_received));
             context->next_param = UNEXPECTED_PARAMETER;
             context->go_to_offset = true;
             break;
