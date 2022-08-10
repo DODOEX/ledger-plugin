@@ -1,4 +1,5 @@
 #include "boilerplate_plugin.h"
+#include "utils.h"
 
 // EDIT THIS: You need to adapt / remove the static functions (set_send_ui, set_receive_ui ...) to
 // match what you wish to display.
@@ -11,16 +12,13 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
     uint8_t decimals = context->decimals_pay;
     const char *ticker = context->ticker_pay;
     const uint8_t *amount = context->amount_pay;
-    uint8_t amount_size = sizeof(context->amount_pay); 
+    uint8_t amount_size = sizeof(context->amount_pay);
+    bool token_found = context->token_found_pay;
 
-    // If the token look up failed, use the default network ticker along with the default decimals.
-    if (!context->token_found_pay) {
-        decimals = WEI_TO_ETHER;
-        ticker = msg->network_ticker;
-    }
     char weth[3] = "W";
     switch (context->selectorIndex) {
         case SWAP_WETH9_WITHDRAW:
+            token_found = true;
             strcat(weth, msg->network_ticker);
             strlcpy(ticker, weth, sizeof(ticker) + 1);
             break;
@@ -31,6 +29,15 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
         
         default:
             break;
+    }
+    if (!token_found) {
+        if (ADDRESS_IS_NETWORK_TOKEN(context->token_pay)) {
+            decimals = WEI_TO_ETHER;
+            ticker = msg->network_ticker;
+        } else {
+            strlcpy(msg->msg, "Unknown token", msg->msgLength);
+            return;
+        }
     }
     if (context->eth_amount_pay) {
         amount = msg->pluginSharedRO->txContent->value.value;
@@ -49,16 +56,12 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
     const char *ticker = context->ticker_received;
     const uint8_t *amount = context->amount_received;
     uint8_t amount_size = sizeof(context->amount_received); 
-
-    // If the token look up failed, use the default network ticker along with the default decimals.
-    if (!context->token_found_received) {
-        decimals = WEI_TO_ETHER;
-        ticker = msg->network_ticker;
-    }
+    bool token_found = context->token_found_received;
 
     char weth[3] = "W";
     switch (context->selectorIndex) {
         case SWAP_WETH9_DEPOSIT:
+            token_found = true;
             strcat(weth, msg->network_ticker);
             strlcpy(ticker, weth, sizeof(ticker) + 1);
             amount = msg->pluginSharedRO->txContent->value.value;
@@ -67,6 +70,15 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
         
         default:
             break;
+    }
+    if (!token_found) {
+        if (ADDRESS_IS_NETWORK_TOKEN(context->token_received)) {
+            decimals = WEI_TO_ETHER;
+            ticker = msg->network_ticker;
+        } else {
+            strlcpy(msg->msg, "Unknown token", msg->msgLength);
+            return;
+        }
     }
 
     amountToString(amount,
