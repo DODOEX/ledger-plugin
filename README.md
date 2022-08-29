@@ -9,7 +9,7 @@
 |         | [0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2#code)    | WETH9 |
 | bsc     | [0x8F8Dd7DB1bDA5eD3da8C9daf3bfa471c12d58486](https://bscscan.com/address/0x8f8dd7db1bda5ed3da8c9daf3bfa471c12d58486#code)     | DODOV2Proxy02  |
 |         | [0x6B3D817814eABc984d51896b1015C0b89E9737Ca](https://bscscan.com/address/0x6b3d817814eabc984d51896b1015c0b89e9737ca#code)     | DODORouteProxy |
-|         | [0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c](https://etherscan.io/address/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c#code)    | WETH9 |
+|         | [0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c](https://bscscan.com/address/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c#code)    | WETH9 |
 | polygon | [0xa222e6a71D1A1Dd5F279805fbe38d5329C1d0e70](https://polygonscan.com/address/0xa222e6a71D1A1Dd5F279805fbe38d5329C1d0e70#code) | DODOV2Proxy02  |
 |         | [0x2fA4334cfD7c56a0E7Ca02BD81455205FcBDc5E9](https://polygonscan.com/address/0x2fa4334cfd7c56a0e7ca02bd81455205fcbdc5e9#code) | DODORouteProxy |
 |         | [0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270](https://etherscan.io/address/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270#code)    | WETH9 |
