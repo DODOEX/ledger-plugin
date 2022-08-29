@@ -19,6 +19,7 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
     switch (context->selectorIndex) {
         case SWAP_WETH9_WITHDRAW:
             token_found = true;
+            decimals = WEI_TO_ETHER;
             strcat(weth, msg->network_ticker);
             strlcpy(ticker, weth, sizeof(ticker) + 1);
             break;
@@ -62,6 +63,7 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
     switch (context->selectorIndex) {
         case SWAP_WETH9_DEPOSIT:
             token_found = true;
+            decimals = WEI_TO_ETHER;
             strcat(weth, msg->network_ticker);
             strlcpy(ticker, weth, sizeof(ticker) + 1);
             amount = msg->pluginSharedRO->txContent->value.value;
