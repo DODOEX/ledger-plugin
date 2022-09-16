@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   job_build_plugin_nano_s:
@@ -21,14 +21,12 @@ jobs:
       - name: Clone SDK
         uses: actions/checkout@v2
         with:
-          repository: LedgerHQ/ethereum-plugin-sdk
-          path: ethereum-plugin-sdk
-          ref: ${{ github.base_ref || github.ref_name }}
+          submodules: recursive
       - name: Build plugin for Nano S
         run: |
+          cd app-plugin
           make clean
           make BOLOS_SDK=$NANOS_SDK
-  
   job_build_plugin_nano_sp:
     name: Build plugin for Nano S Plus
     runs-on: ubuntu-latest
@@ -40,14 +38,12 @@ jobs:
       - name: Clone SDK
         uses: actions/checkout@v2
         with:
-          repository: LedgerHQ/ethereum-plugin-sdk
-          path: ethereum-plugin-sdk
-          ref: ${{ github.base_ref || github.ref_name }}
+          submodules: recursive
       - name: Build plugin for Nano S Plus
         run: |
+          cd app-plugin
           make clean
           make BOLOS_SDK=$NANOSP_SDK
-
   job_build_plugin_nano_x:
     name: Build plugin for Nano X
     runs-on: ubuntu-latest
@@ -59,14 +55,13 @@ jobs:
       - name: Clone SDK
         uses: actions/checkout@v2
         with:
-          repository: LedgerHQ/ethereum-plugin-sdk
-          path: ethereum-plugin-sdk
-          ref: ${{ github.base_ref || github.ref_name }}
+          submodules: recursive
       - name: Build plugin for Nano X
         run: |
+          cd app-plugin
           make clean
           make BOLOS_SDK=$NANOX_SDK
-
+  
   job_build_plugin_debug_nano_s:
     name: Build plugin for Nano S testing
     runs-on: ubuntu-latest
@@ -78,22 +73,22 @@ jobs:
       - name: Clone SDK
         uses: actions/checkout@v2
         with:
-          repository: LedgerHQ/ethereum-plugin-sdk
-          path: ethereum-plugin-sdk
-          ref: ${{ github.base_ref || github.ref_name }}
+          submodules: recursive
       - name: Build plugin
         run: |
+          cd app-plugin
           make clean
           make -j DEBUG=1 BOLOS_SDK=$NANOS_SDK
       - name: Move binary to test directory
         run: |
+          cd app-plugin
           mkdir -p ./tests/elfs/
           mv bin/app.elf ./tests/elfs/plugin_nanos.elf
       - name: Upload plugin binary
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/plugin_nanos.elf
+          path: app-plugin/tests/elfs/plugin_nanos.elf
   
 
   job_build_plugin_debug_nano_sp:
@@ -107,22 +102,22 @@ jobs:
       - name: Clone SDK
         uses: actions/checkout@v2
         with:
-          repository: LedgerHQ/ethereum-plugin-sdk
-          path: ethereum-plugin-sdk
-          ref: ${{ github.base_ref || github.ref_name }}
+          submodules: recursive
       - name: Build plugin
         run: |
+          cd app-plugin
           make clean
           make -j DEBUG=1 BOLOS_SDK=$NANOSP_SDK
       - name: Move binary to test directory
         run: |
+          cd app-plugin
           mkdir -p ./tests/elfs/
           mv bin/app.elf ./tests/elfs/plugin_nanosp.elf
       - name: Upload plugin binary
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/plugin_nanosp.elf
+          path: app-plugin/tests/elfs/plugin_nanosp.elf
 
   job_build_plugin_debug_nano_x:
     name: Build plugin for Nano X testing
@@ -135,23 +130,24 @@ jobs:
       - name: Clone SDK
         uses: actions/checkout@v2
         with:
-          repository: LedgerHQ/ethereum-plugin-sdk
-          path: ethereum-plugin-sdk
-          ref: ${{ github.base_ref || github.ref_name }}
+          submodules: recursive
       - name: Build plugin
         run: |
+          cd app-plugin
           make clean
           make -j DEBUG=1 BOLOS_SDK=$NANOX_SDK
       - name: Move binary to test directory
         run: |
+          cd app-plugin
           mkdir -p ./tests/elfs/
           mv bin/app.elf ./tests/elfs/plugin_nanox.elf
       - name: Upload plugin binary
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/plugin_nanox.elf
-
+          path: app-plugin/tests/elfs/plugin_nanox.elf
+          
+  
   job_build_ethereum_nano_s:
     name: Build Ethereum application for Nano S testing
     runs-on: ubuntu-latest
@@ -162,7 +158,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: LedgerHQ/app-ethereum
-          ref: ${{ github.base_ref || github.ref_name }}
           submodules: recursive
       - name: Build ethereum
         run: |
@@ -170,13 +165,13 @@ jobs:
           make -j DEBUG=1 BYPASS_SIGNATURES=1 BOLOS_SDK=$NANOS_SDK CHAIN=ethereum
       - name: Move binary to test directory
         run: |
-          mkdir -p ./tests/elfs/
-          mv bin/app.elf ./tests/elfs/ethereum_nanos.elf
+          mkdir -p ./app-plugin/tests/elfs/
+          mv bin/app.elf ./app-plugin/tests/elfs/ethereum_nanos.elf
       - name: Upload plugin binary
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/ethereum_nanos.elf
+          path: app-plugin/tests/elfs/ethereum_nanos.elf
   
   job_build_ethereum_nano_sp:
     name: Build Ethereum application for Nano S Plus testing
@@ -188,7 +183,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: LedgerHQ/app-ethereum
-          ref: ${{ github.base_ref || github.ref_name }}
           submodules: recursive
       - name: Build ethereum
         run: |
@@ -196,13 +190,13 @@ jobs:
           make -j DEBUG=1 BYPASS_SIGNATURES=1 BOLOS_SDK=$NANOSP_SDK CHAIN=ethereum
       - name: Move binary to test directory
         run: |
-          mkdir -p ./tests/elfs/
-          mv bin/app.elf ./tests/elfs/ethereum_nanosp.elf
+          mkdir -p ./app-plugin/tests/elfs/
+          mv bin/app.elf ./app-plugin/tests/elfs/ethereum_nanosp.elf
       - name: Upload plugin binary
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/ethereum_nanosp.elf
+          path: app-plugin/tests/elfs/ethereum_nanosp.elf
 
   job_build_ethereum_nano_x:
     name: Build Ethereum application for Nano X testing
@@ -214,7 +208,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: LedgerHQ/app-ethereum
-          ref: ${{ github.base_ref || github.ref_name }}
           submodules: recursive
       - name: Build ethereum
         run: |
@@ -222,14 +215,14 @@ jobs:
           make -j DEBUG=1 BYPASS_SIGNATURES=1 BOLOS_SDK=$NANOX_SDK CHAIN=ethereum
       - name: Move binary to test directory
         run: |
-          mkdir -p ./tests/elfs/
-          mv bin/app.elf ./tests/elfs/ethereum_nanox.elf
+          mkdir -p ./app-plugin/tests/elfs/
+          mv bin/app.elf ./app-plugin/tests/elfs/ethereum_nanox.elf
       - name: Upload plugin binary
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/ethereum_nanox.elf
-
+          path: app-plugin/tests/elfs/ethereum_nanox.elf
+  
   jobs-e2e-tests:
     name: E2E Tests
     needs: [job_build_plugin_debug_nano_s, job_build_plugin_debug_nano_sp, job_build_plugin_debug_nano_x, job_build_ethereum_nano_s, job_build_ethereum_nano_sp, job_build_ethereum_nano_x]
@@ -246,9 +239,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: binaries
-          path: tests/elfs/
+          path: app-plugin/tests/elfs/
       - name: Check downloaded binaries
-        run: ls -lh ./tests/elfs
+        run: ls -lh ./app-plugin/tests/elfs
       - name: Install system dependencies
         run: sudo apt-get update -y && sudo apt-get install -y libusb-1.0.0 libudev-dev
       - name: Install node
@@ -260,7 +253,7 @@ jobs:
           npm install -g yarn
       - name: Build/Install build js deps
         run: |
-          cd tests && yarn install
+          cd app-plugin/tests && yarn install
       - name: Run zemu tests
         run: |
-          cd tests && yarn test
+          cd app-plugin/tests && yarn test
