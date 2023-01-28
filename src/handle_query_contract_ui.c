@@ -27,7 +27,7 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
             amount = msg->pluginSharedRO->txContent->value.value;
             amount_size = msg->pluginSharedRO->txContent->value.length;
             break;
-        
+
         default:
             break;
     }
@@ -56,7 +56,7 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
     uint8_t decimals = context->decimals_received;
     const char *ticker = context->ticker_received;
     const uint8_t *amount = context->amount_received;
-    uint8_t amount_size = sizeof(context->amount_received); 
+    uint8_t amount_size = sizeof(context->amount_received);
     bool token_found = context->token_found_received;
 
     char weth[3] = "W";
@@ -69,7 +69,7 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
             amount = msg->pluginSharedRO->txContent->value.value;
             amount_size = msg->pluginSharedRO->txContent->value.length;
             break;
-        
+
         default:
             break;
     }
@@ -83,12 +83,7 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
         }
     }
 
-    amountToString(amount,
-                   amount_size,
-                   decimals,
-                   ticker,
-                   msg->msg,
-                   msg->msgLength);
+    amountToString(amount, amount_size, decimals, ticker, msg->msg, msg->msgLength);
 }
 
 void handle_query_contract_ui(void *parameters) {

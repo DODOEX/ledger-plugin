@@ -60,8 +60,7 @@ typedef struct context_t {
     char ticker_pay[MAX_TICKER_LEN];
     uint8_t decimals_pay;
     uint8_t token_found_pay;
-    bool eth_amount_pay;   // true if the amount is in ETH
-
+    bool eth_amount_pay;  // true if the amount is in ETH
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.

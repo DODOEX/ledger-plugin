@@ -12,7 +12,9 @@ void handle_provide_token(void *parameters) {
         // Store its decimals.
         context->decimals_pay = msg->item1->token.decimals;
         // Store its ticker.
-        strlcpy(context->ticker_pay, (char *) msg->item1->token.ticker, sizeof(context->ticker_pay));
+        strlcpy(context->ticker_pay,
+                (char *) msg->item1->token.ticker,
+                sizeof(context->ticker_pay));
 
         // Keep track that we found the token.
         context->token_found_pay = true;
@@ -31,7 +33,9 @@ void handle_provide_token(void *parameters) {
         // Store its decimals.
         context->decimals_received = msg->item2->token.decimals;
         // Store its ticker.
-        strlcpy(context->ticker_received, (char *) msg->item2->token.ticker, sizeof(context->ticker_received));
+        strlcpy(context->ticker_received,
+                (char *) msg->item2->token.ticker,
+                sizeof(context->ticker_received));
 
         // Keep track that we found the token.
         context->token_found_received = true;
@@ -44,5 +48,5 @@ void handle_provide_token(void *parameters) {
         // like so:
         // msg->additionalScreens = 1;
     }
-   msg->result = ETH_PLUGIN_RESULT_OK;
+    msg->result = ETH_PLUGIN_RESULT_OK;
 }

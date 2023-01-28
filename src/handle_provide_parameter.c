@@ -1,12 +1,13 @@
 #include "boilerplate_plugin.h"
 
 // EDIT THIS: Remove this function and write your own handlers!
-static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg,
+                                               context_t *context) {
     if (context->go_to_offset) {
-    //    if (msg->parameterOffset != context->offset + SELECTOR_SIZE) {
-           return;
-    //    }
-    //    context->go_to_offset = false;
+        //    if (msg->parameterOffset != context->offset + SELECTOR_SIZE) {
+        return;
+        //    }
+        //    context->go_to_offset = false;
     }
     switch (context->next_param) {
         case FROM_TOKEN:
@@ -24,15 +25,13 @@ static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg,
             context->next_param = FROM_TOKEN_AMOUNT;
             break;
         case FROM_TOKEN_AMOUNT:
-            copy_parameter(context->amount_pay,
-                            msg->parameter,
-                            sizeof(context->amount_pay));
+            copy_parameter(context->amount_pay, msg->parameter, sizeof(context->amount_pay));
             context->next_param = MIN_RETURN_AMOUNT;
             break;
         case MIN_RETURN_AMOUNT:
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->go_to_offset = true;
             context->next_param = UNEXPECTED_PARAMETER;
             break;
@@ -44,7 +43,8 @@ static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg,
     }
 }
 
-static void handle_swap_v2_proxy_dodo_swap_v2_token_to_token(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_v2_proxy_dodo_swap_v2_token_to_token(ethPluginProvideParameter_t *msg,
+                                                             context_t *context) {
     if (context->go_to_offset) {
         return;
     }
@@ -58,15 +58,13 @@ static void handle_swap_v2_proxy_dodo_swap_v2_token_to_token(ethPluginProvidePar
             context->next_param = FROM_TOKEN_AMOUNT;
             break;
         case FROM_TOKEN_AMOUNT:
-            copy_parameter(context->amount_pay,
-                            msg->parameter,
-                            sizeof(context->amount_pay));
+            copy_parameter(context->amount_pay, msg->parameter, sizeof(context->amount_pay));
             context->next_param = MIN_RETURN_AMOUNT;
             break;
         case MIN_RETURN_AMOUNT:
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->go_to_offset = true;
             context->next_param = UNEXPECTED_PARAMETER;
             break;
@@ -78,7 +76,8 @@ static void handle_swap_v2_proxy_dodo_swap_v2_token_to_token(ethPluginProvidePar
     }
 }
 
-static void handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(ethPluginProvideParameter_t *msg,
+                                                           context_t *context) {
     if (context->go_to_offset) {
         return;
     }
@@ -88,15 +87,13 @@ static void handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(ethPluginProvideParam
             context->next_param = FROM_TOKEN_AMOUNT;
             break;
         case FROM_TOKEN_AMOUNT:
-            copy_parameter(context->amount_pay,
-                            msg->parameter,
-                            sizeof(context->amount_pay));
+            copy_parameter(context->amount_pay, msg->parameter, sizeof(context->amount_pay));
             context->next_param = MIN_RETURN_AMOUNT;
             break;
         case MIN_RETURN_AMOUNT:
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->go_to_offset = true;
             context->next_param = UNEXPECTED_PARAMETER;
             break;
@@ -108,7 +105,8 @@ static void handle_swap_v2_proxy_dodo_swap_v2_token_to_eth(ethPluginProvideParam
     }
 }
 
-static void handle_swap_v2_proxy_dodo_swap_v2_eth_to_token(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_v2_proxy_dodo_swap_v2_eth_to_token(ethPluginProvideParameter_t *msg,
+                                                           context_t *context) {
     if (context->go_to_offset) {
         return;
     }
@@ -120,8 +118,8 @@ static void handle_swap_v2_proxy_dodo_swap_v2_eth_to_token(ethPluginProvideParam
             break;
         case MIN_RETURN_AMOUNT:
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->go_to_offset = true;
             context->next_param = UNEXPECTED_PARAMETER;
             break;
@@ -133,7 +131,8 @@ static void handle_swap_v2_proxy_dodo_swap_v2_eth_to_token(ethPluginProvideParam
     }
 }
 
-static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *msg,
+                                                  context_t *context) {
     if (context->go_to_offset) {
         return;
     }
@@ -147,15 +146,13 @@ static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *m
             context->next_param = FROM_TOKEN_AMOUNT;
             break;
         case FROM_TOKEN_AMOUNT:
-            copy_parameter(context->amount_pay,
-                            msg->parameter,
-                            sizeof(context->amount_pay));
+            copy_parameter(context->amount_pay, msg->parameter, sizeof(context->amount_pay));
             context->next_param = MIN_RETURN_AMOUNT;
             break;
         case MIN_RETURN_AMOUNT:
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->go_to_offset = true;
             context->next_param = UNEXPECTED_PARAMETER;
             break;
@@ -167,7 +164,8 @@ static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *m
     }
 }
 
-static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParameter_t *msg, context_t *context) {
+static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParameter_t *msg,
+                                                         context_t *context) {
     if (context->go_to_offset) {
         if (msg->parameterOffset != context->offset + SELECTOR_SIZE) {
             return;
@@ -176,15 +174,13 @@ static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParamet
     }
     switch (context->next_param) {
         case FROM_TOKEN_AMOUNT:
-            copy_parameter(context->amount_pay,
-                            msg->parameter,
-                            sizeof(context->amount_pay));
+            copy_parameter(context->amount_pay, msg->parameter, sizeof(context->amount_pay));
             context->next_param = MIN_RETURN_AMOUNT;
             break;
         case MIN_RETURN_AMOUNT:
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->next_param = PATH_OFFSET;
             context->offset = msg->parameterOffset - SELECTOR_SIZE + PARAMETER_LENGTH * 3;
             context->go_to_offset = true;
@@ -221,12 +217,10 @@ static void handle_swap_weth9_withdraw(ethPluginProvideParameter_t *msg, context
     }
     switch (context->next_param) {
         case FROM_TOKEN_AMOUNT:
-            copy_parameter(context->amount_pay,
-                            msg->parameter,
-                            sizeof(context->amount_pay));
+            copy_parameter(context->amount_pay, msg->parameter, sizeof(context->amount_pay));
             copy_parameter(context->amount_received,
-                            msg->parameter,
-                            sizeof(context->amount_received));
+                           msg->parameter,
+                           sizeof(context->amount_received));
             context->next_param = UNEXPECTED_PARAMETER;
             context->go_to_offset = true;
             break;
