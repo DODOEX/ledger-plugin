@@ -1,4 +1,4 @@
-#include "boilerplate_plugin.h"
+#include "dodo_plugin.h"
 #include "utils.h"
 
 // EDIT THIS: You need to adapt / remove the static functions (set_send_ui, set_receive_ui ...) to
@@ -10,18 +10,16 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
     strlcpy(msg->title, "Send", msg->titleLength);
 
     uint8_t decimals = context->decimals_pay;
-    const char *ticker = context->ticker_pay;
+    char *ticker = context->ticker_pay;
     const uint8_t *amount = context->amount_pay;
     uint8_t amount_size = sizeof(context->amount_pay);
     bool token_found = context->token_found_pay;
 
-    char weth[3] = "W";
     switch (context->selectorIndex) {
         case SWAP_WETH9_WITHDRAW:
             token_found = true;
             decimals = WEI_TO_ETHER;
-            strcat(weth, msg->network_ticker);
-            strlcpy(ticker, weth, sizeof(ticker) + 1);
+            snprintf(ticker, sizeof(ticker) + 1, "W%s", msg->network_ticker);
             break;
         case SWAP_WETH9_DEPOSIT:
             amount = msg->pluginSharedRO->txContent->value.value;
@@ -59,13 +57,11 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
     uint8_t amount_size = sizeof(context->amount_received);
     bool token_found = context->token_found_received;
 
-    char weth[3] = "W";
     switch (context->selectorIndex) {
         case SWAP_WETH9_DEPOSIT:
             token_found = true;
             decimals = WEI_TO_ETHER;
-            strcat(weth, msg->network_ticker);
-            strlcpy(ticker, weth, sizeof(ticker) + 1);
+            snprintf(ticker, sizeof(ticker) + 1, "W%s", msg->network_ticker);
             amount = msg->pluginSharedRO->txContent->value.value;
             amount_size = msg->pluginSharedRO->txContent->value.length;
             break;

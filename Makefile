@@ -149,5 +149,5 @@ include $(BOLOS_SDK)/Makefile.rules
 dep/%.d: %.c Makefile
 
 listvariants:
-        # EDIT THIS: replace `boilerplate` by the lowercase name of your plugin
-	@echo VARIANTS NONE boilerplate
+        # lowercase name of your plugin
+	@echo VARIANTS NONE dodo

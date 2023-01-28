@@ -1,4 +1,4 @@
-#include "boilerplate_plugin.h"
+#include "dodo_plugin.h"
 
 static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n, selector_t *out) {
     for (selector_t i = 0; i < n; i++) {
@@ -36,14 +36,12 @@ void handle_init_contract(void *parameters) {
     memset(context, 0, sizeof(*context));
 
     uint32_t selector = U4BE(msg->selector, 0);
-    if (find_selector(selector, BOILERPLATE_SELECTORS, NUM_SELECTORS, &context->selectorIndex)) {
+    if (find_selector(selector, DODO_SELECTORS, NUM_SELECTORS, &context->selectorIndex)) {
         msg->result = ETH_PLUGIN_RESULT_UNAVAILABLE;
         return;
     }
 
     // Set `next_param` to be the first field we expect to parse.
-    // EDIT THIS: Adapt the `cases`, and set the `next_param` to be the first parameter you expect
-    // to parse.
     switch (context->selectorIndex) {
         case SWAP_V2_PROXY_EXTERNAL_SWAP:
         case SWAP_V2_PROXY_DODO_SWAP_V2_TOKEN_TO_TOKEN:
@@ -52,16 +50,12 @@ void handle_init_contract(void *parameters) {
             context->next_param = FROM_TOKEN;
             break;
         case SWAP_DODO_ROUTE_PROXY_DODO_MUTLI_SWAP:
+        case SWAP_WETH9_WITHDRAW:
+        case SWAP_WETH9_DEPOSIT:
             context->next_param = FROM_TOKEN_AMOUNT;
             break;
         case SWAP_V2_PROXY_DODO_SWAP_V2_ETH_TO_TOKEN:
             context->next_param = TO_TOKEN;
-            break;
-        case SWAP_WETH9_WITHDRAW:
-            context->next_param = FROM_TOKEN_AMOUNT;
-            break;
-        case SWAP_WETH9_DEPOSIT:
-            context->next_param = FROM_TOKEN_AMOUNT;
             break;
         default:
             PRINTF("Missing selectorIndex: %d\n", context->selectorIndex);
