@@ -40,10 +40,10 @@ typedef enum {
     PATH_OFFSET,
     PATH_LENGTH,
     UNEXPECTED_PARAMETER,
+    NONE,
 } parameter;
 
-// EDIT THIS: Rename `BOILERPLATE` to be the same as the one initialized in `main.c`.
-extern const uint32_t BOILERPLATE_SELECTORS[NUM_SELECTORS];
+extern const uint32_t DODO_SELECTORS[NUM_SELECTORS];
 
 // Shared global memory with Ethereum app. Must be at most 5 * 32 bytes.
 // EDIT THIS: This struct is used by your plugin to save the parameters you parse. You
@@ -60,8 +60,7 @@ typedef struct context_t {
     char ticker_pay[MAX_TICKER_LEN];
     uint8_t decimals_pay;
     uint8_t token_found_pay;
-    bool eth_amount_pay;   // true if the amount is in ETH
-
+    bool eth_amount_pay;  // true if the amount is in ETH
 
     // For parsing data.
     uint8_t next_param;  // Set to be the next param we expect to parse.
