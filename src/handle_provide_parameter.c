@@ -1,4 +1,5 @@
 #include "dodo_plugin.h"
+#include "utils.h"
 
 static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg,
                                                context_t *context) {
@@ -150,6 +151,8 @@ static void handle_swap_dodo_route_proxy_mix_swap(ethPluginProvideParameter_t *m
 static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParameter_t *msg,
                                                          context_t *context) {
     uint16_t tmp;
+    const uint8_t *midTokenLength =
+        "0000000000000000000000000000000000000000000000000000000000000004";
     if (context->go_to_offset) {
         if (msg->parameterOffset != context->offset) {
             return;
@@ -179,8 +182,6 @@ static void handle_swap_dodo_route_proxy_dodo_mutli_swap(ethPluginProvideParamet
             context->go_to_offset = true;
             break;
         case MID_TOKEN_LENGTH:
-            const uint8_t *midTokenLength =
-                "0000000000000000000000000000000000000000000000000000000000000004";
             if (msg->parameter != midTokenLength) {
                 msg->result = ETH_PLUGIN_RESULT_ERROR;
                 return;
