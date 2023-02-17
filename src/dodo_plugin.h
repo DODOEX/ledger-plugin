@@ -37,8 +37,8 @@ typedef enum {
     MIN_RETURN_AMOUNT,
     CALL_DATA_CONCAT,
     IS_INCENTIVE,
-    PATH_OFFSET,
-    PATH_LENGTH,
+    MID_TOKEN_OFFSET,
+    MID_TOKEN_LENGTH,
     UNEXPECTED_PARAMETER,
     NONE,
 } parameter;
@@ -67,6 +67,7 @@ typedef struct context_t {
     uint16_t offset;     // Offset at which the array or struct starts.
     bool go_to_offset;   // If set, will force the parsing to iterate through parameters until
                          // `offset` is reached.
+    bool valid;
 
     // For both parsing and display.
     selector_t selectorIndex;

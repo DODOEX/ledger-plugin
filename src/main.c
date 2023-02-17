@@ -81,19 +81,30 @@ __attribute__((section(".boot"))) int main(int arg0) {
                 return 0;
             } else {
                 // Not called from dashboard: called from the ethereum app!
-                const unsigned int *args = (const unsigned int *) arg0;
+                unsigned int *args = (unsigned int *) arg0;
 
                 // If `ETH_PLUGIN_CHECK_PRESENCE` is set, this means the caller is just trying to
                 // know whether this app exists or not. We can skip `dispatch_plugin_calls`.
                 if (args[0] != ETH_PLUGIN_CHECK_PRESENCE) {
                     dispatch_plugin_calls(args[0], (void *) args[1]);
                 }
-
-                // Call `os_lib_end`, go back to the ethereum app.
-                os_lib_end();
             }
         }
+        CATCH_OTHER(e) {
+            switch (e) {
+                // These exceptions are only generated on handle_query_contract_ui()
+                case 0x6502:
+                case EXCEPTION_OVERFLOW:
+                    handle_query_ui_exception((unsigned int *) arg0);
+                    break;
+                default:
+                    break;
+            }
+            PRINTF("Exception 0x%x caught\n", e);
+        }
         FINALLY {
+            // Call `os_lib_end`, go back to the ethereum app.
+            os_lib_end();
         }
     }
     END_TRY;
