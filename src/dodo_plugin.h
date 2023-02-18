@@ -37,13 +37,23 @@ typedef enum {
     MIN_RETURN_AMOUNT,
     CALL_DATA_CONCAT,
     IS_INCENTIVE,
-    PATH_OFFSET,
-    PATH_LENGTH,
+    MID_TOKEN_OFFSET,
+    MID_TOKEN_LENGTH,
     UNEXPECTED_PARAMETER,
     NONE,
 } parameter;
 
 extern const uint32_t DODO_SELECTORS[NUM_SELECTORS];
+
+// `0xeeeee` as a dummy address to represent ETH in Swap.
+extern const uint8_t ETH_ADDRESS[ADDRESS_LENGTH];
+
+// Used to indicate that the beneficiary should be the sender.
+extern const uint8_t NULL_ETH_ADDRESS[ADDRESS_LENGTH];
+
+#define ADDRESS_IS_NETWORK_TOKEN(_addr)             \
+    (!memcmp(_addr, ETH_ADDRESS, ADDRESS_LENGTH) || \
+     !memcmp(_addr, NULL_ETH_ADDRESS, ADDRESS_LENGTH))
 
 // Shared global memory with Ethereum app. Must be at most 5 * 32 bytes.
 // EDIT THIS: This struct is used by your plugin to save the parameters you parse. You
@@ -67,6 +77,7 @@ typedef struct context_t {
     uint16_t offset;     // Offset at which the array or struct starts.
     bool go_to_offset;   // If set, will force the parsing to iterate through parameters until
                          // `offset` is reached.
+    bool valid;
 
     // For both parsing and display.
     selector_t selectorIndex;

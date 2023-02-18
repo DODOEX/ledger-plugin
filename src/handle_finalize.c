@@ -14,5 +14,9 @@ void handle_finalize(void *parameters) {
     msg->tokenLookup1 = context->token_pay;
     msg->tokenLookup2 = context->token_received;
 
-    msg->result = ETH_PLUGIN_RESULT_OK;
+    if (context->valid || context->selectorIndex == SWAP_WETH9_DEPOSIT) {
+        msg->result = ETH_PLUGIN_RESULT_OK;
+    } else {
+        msg->result = ETH_PLUGIN_RESULT_ERROR;
+    }
 }

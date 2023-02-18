@@ -1,5 +1,4 @@
 #include "dodo_plugin.h"
-#include "utils.h"
 
 // EDIT THIS: You need to adapt / remove the static functions (set_send_ui, set_receive_ui ...) to
 // match what you wish to display.
@@ -19,7 +18,7 @@ static void set_send_ui(ethQueryContractUI_t *msg, const context_t *context) {
         case SWAP_WETH9_WITHDRAW:
             token_found = true;
             decimals = WEI_TO_ETHER;
-            snprintf(ticker, sizeof(ticker) + 1, "W%s", msg->network_ticker);
+            snprintf(ticker, sizeof(ticker), "W%s", msg->network_ticker);
             break;
         case SWAP_WETH9_DEPOSIT:
             amount = msg->pluginSharedRO->txContent->value.value;
@@ -61,7 +60,7 @@ static void set_receive_ui(ethQueryContractUI_t *msg, const context_t *context) 
         case SWAP_WETH9_DEPOSIT:
             token_found = true;
             decimals = WEI_TO_ETHER;
-            snprintf(ticker, sizeof(ticker) + 1, "W%s", msg->network_ticker);
+            snprintf(ticker, sizeof(ticker), "W%s", msg->network_ticker);
             amount = msg->pluginSharedRO->txContent->value.value;
             amount_size = msg->pluginSharedRO->txContent->value.length;
             break;
