@@ -1,5 +1,4 @@
 #include "dodo_plugin.h"
-#include "utils.h"
 
 // EDIT THIS: You need to adapt / remove the static functions (set_send_ui, set_receive_ui ...) to
 // match what you wish to display.

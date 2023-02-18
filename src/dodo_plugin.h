@@ -45,6 +45,16 @@ typedef enum {
 
 extern const uint32_t DODO_SELECTORS[NUM_SELECTORS];
 
+// `0xeeeee` as a dummy address to represent ETH in Swap.
+extern const uint8_t ETH_ADDRESS[ADDRESS_LENGTH];
+
+// Used to indicate that the beneficiary should be the sender.
+extern const uint8_t NULL_ETH_ADDRESS[ADDRESS_LENGTH];
+
+#define ADDRESS_IS_NETWORK_TOKEN(_addr)             \
+    (!memcmp(_addr, ETH_ADDRESS, ADDRESS_LENGTH) || \
+     !memcmp(_addr, NULL_ETH_ADDRESS, ADDRESS_LENGTH))
+
 // Shared global memory with Ethereum app. Must be at most 5 * 32 bytes.
 // EDIT THIS: This struct is used by your plugin to save the parameters you parse. You
 // will need to adapt this struct to your plugin.

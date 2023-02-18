@@ -1,5 +1,4 @@
 #include "dodo_plugin.h"
-#include "utils.h"
 
 static void handle_swap_v2_proxy_external_swap(ethPluginProvideParameter_t *msg,
                                                context_t *context) {
